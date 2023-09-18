@@ -4,12 +4,25 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TelegramSerializer, AttachmentSerializer
 from .models import Telegram
+from user_api.models import AppUser
+
+#-------------------- create telegram 
 
 @api_view(['POST'])
 def create_telegram(request):
     telegram_serializer = TelegramSerializer(data=request.data)
     if telegram_serializer.is_valid():
-        telegram = telegram_serializer.save()
+        sender_email = request.data.get('sender_email')
+        receiver_email = request.data.get('receiver_email')
+
+        # Look up sender and receiver user objects by email
+        try:
+            sender = AppUser.objects.get(email=sender_email)
+            receiver = AppUser.objects.get(email=receiver_email)
+        except AppUser.DoesNotExist:
+            return Response({"detail": "Sender or receiver not found."}, status=status.HTTP_400_BAD_REQUEST)
+
+        telegram = telegram_serializer.save(sender=sender, receiver=receiver)
 
         # Handle attachments
         attachments_data = request.FILES.getlist('attachments', [])
