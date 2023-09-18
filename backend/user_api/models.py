@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
-class UserManager(BaseUserManager):
+class AppUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError('An email is required.')
@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-class User(AbstractBaseUser, PermissionsMixin):
+class AppUser(AbstractBaseUser, PermissionsMixin):
     user_id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=50, unique=True)
@@ -47,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
     
-    objects = UserManager()
+    objects = AppUserManager()
     
     def __str__(self):
         return self.username
