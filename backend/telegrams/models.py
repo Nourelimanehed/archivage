@@ -39,8 +39,8 @@ class Telegram(models.Model):
         ('Non urgent', 'Non urgent')
     )
 
-    sender = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='sent_telegrams')
-    receiver = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='received_telegrams')
+    sender = models.EmailField(max_length=50)
+    receiver = models.EmailField(max_length=50)
     date = models.DateTimeField()
     subject = models.CharField(max_length=255)
     content = models.TextField()
