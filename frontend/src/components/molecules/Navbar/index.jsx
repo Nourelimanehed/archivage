@@ -20,7 +20,7 @@ export default function Navbar() {
 
     const navLinks = [
         { title: "Acceuil", link: "/", icon: <FaHome /> },
-        { title: "About", link: "/about", icon: <RiFolderInfoFill /> },
+        { title: "About ", link: "/about", icon: <RiFolderInfoFill /> },
         
     ];
 

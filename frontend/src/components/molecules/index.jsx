@@ -18,7 +18,7 @@ import PrintPdfLaporanGaji from './PrintPdf/PrintPdfLaporanGaji';
 import PrintPdfSlipGaji from './PrintPdf/PrintPdfSlipGaji';
 import PrintPdfLaporanAbsensi from './PrintPdf/PrintPdfLaporanAbsensi';
 import SidebarAdmin from './Sidebar/SidebarAdmin';
-import SidebarPegawai from './Sidebar/SidebarPegawai';
+import SidebarUser from './Sidebar/SidebarPegawai';
 import SidebarLinkGroup from './Sidebar/SidebarLinkGroup';
 
 export {
@@ -42,6 +42,6 @@ export {
     PrintPdfSlipGaji,
     PrintPdfLaporanAbsensi,
     SidebarAdmin,
-    SidebarPegawai,
+    SidebarUser,
     SidebarLinkGroup
 };

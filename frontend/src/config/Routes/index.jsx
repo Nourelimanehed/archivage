@@ -47,15 +47,15 @@ const AppRoutes = () => {
       {/* Route Admin */}
       {/* Master Data Admin */}
       <Route
-        path='/data-pegawai'
+        path='/usersdata'
         element={<DataPegawai />}
       />
       <Route
-        path='/data-pegawai/form-data-pegawai/add'
+        path='/usersdata/form-usersdata/add'
         element={<FormAddDataPegawai />}
       />
       <Route
-        path='/data-pegawai/form-data-pegawai/edit/:id'
+        path='/usersdata/form-usersdata/edit/:id'
         element={<FormEditDataPegawai />}
       />
       <Route
@@ -85,14 +85,14 @@ const AppRoutes = () => {
         element={<FormEditDataKehadiran />}
       />
       <Route
-        path='/data-potongan'
+        path='/telegramsAdmin'
         element={<DataPotongan />}
       />
       <Route
-        path='/data-potongan/form-data-potongan/add'
+        path='/telegramsAdmin/form-data-potongan/add'
         element={<FormAddDataPotongan />} />
       <Route
-        path='/data-potongan/form-data-potongan/edit/:id'
+        path='/telegramsAdmin/form-data-potongan/edit/:id'
         element={<FormEditDataPotongan />} />
       <Route
         path='/data-gaji'

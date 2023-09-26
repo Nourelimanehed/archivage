@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from "react-redux";
-import {SidebarPegawai, Header, Footer } from '../components';
+import {SidebarUser,SidebarAdmin, Header, Footer } from '../components';
 
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -10,8 +10,15 @@ const Layout = ({ children }) => {
     <div className='dark:bg-boxdark-2 dark:text-bodydark'>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className='flex h-screen overflow-hidden'>
+         {/* <!-- ===== Sidebar Admin Start ===== --> */}
+         
+          <SidebarAdmin sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         
-          <SidebarPegawai sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {/* <!-- ===== Sidebar Admin End ===== --> */}
+         {/* <!-- ===== Sidebar Admin Start ===== --> */}
+
+          {/*<SidebarUser sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />*/}
+           {/* <!-- ===== Sidebar Admin End===== --> */}
         
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>

@@ -40,7 +40,6 @@ const DataGajiPegawai = () => {
   };
 
   const onSubmitPrint = async () => {
-
     try {
       const yearData = viewGajiSinglePegawaiByYear(dataYear);
       const monthData = viewGajiSinglePegawaiByMonth(dataMonth);
@@ -49,7 +48,7 @@ const DataGajiPegawai = () => {
       if (yearData.length > 0 && monthData.length > 0 && nameData.length > 0) {
         navigate(`/data-gaji-pegawai/print-page?month=${dataMonth}&year=${dataYear}&name=${nama_pegawai}`);
       } else {
-        console.log("Data not found!");
+        console.log("Données introuvables !");
         Swal.fire({
           icon: "error",
           title: "Données introuvables",
@@ -144,7 +143,6 @@ const DataGajiPegawai = () => {
     }
     
   }, [isError, user, navigate]);
-
 
   return (
     <Layout>

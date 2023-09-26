@@ -27,12 +27,12 @@ const DataPegawai = () => {
     const endIndex = startIndex + ITEMS_PER_PAGE;
 
     const filteredDataPegawai = dataPegawai.filter((pegawai) => {
-        const { nama_pegawai, status } = pegawai;
+        const { email, nama_pegawai, hak_akses } = pegawai;
         const keyword = searchKeyword.toLowerCase();
         const statusKeyword = filterStatus.toLowerCase();
         return (
-            nama_pegawai.toLowerCase().includes(keyword) &&
-            (filterStatus === '' || status.toLowerCase() === statusKeyword)
+            email.toLowerCase().includes(keyword) &&
+            (filterStatus === '' || hak_akses.toLowerCase() === statusKeyword)
         );
     });
 
@@ -58,19 +58,19 @@ const DataPegawai = () => {
 
     const onDeletePegawai = (id) => {
         Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin Menghapus?',
+            title: 'Confirmer',
+            text: 'Êtes-vous sûr de vouloir supprimer ?',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteDataPegawai(id)).then(() => {
                     Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Data pegawai berhasil dihapus.',
+                        title: 'Succès',
+                        text: "Données de l'utilisateur supprimées avec succès.",
                         icon: 'success',
                         timer: 1000,
                         timerProgressBar: true,
@@ -146,10 +146,10 @@ const DataPegawai = () => {
 
     return (
         <Layout>
-            <Breadcrumb pageName="Data Pegawai" />
-            <Link to="/data-pegawai/form-data-pegawai/add">
+            <Breadcrumb pageName="Utilisateurs" />
+            <Link to="/usersdata/form-usersdata/add">
                 <ButtonOne>
-                    <span>Tambah Pegawai</span>
+                    <span>Ajouter un utilisateur</span>
                     <span>
                         <FaPlus />
                     </span>
@@ -158,25 +158,12 @@ const DataPegawai = () => {
             <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mt-6">
                 <div className="flex justify-between items-center mt-4 flex-col md:flex-row md:justify-between">
                     <div className="relative flex-1 md:mr-2 mb-4 md:mb-0">
-                        <div className="relative">
-                            <span className="absolute top-1/2 left-48 z-30 -translate-y-1/2 text-xl">
-                                <MdOutlineKeyboardArrowDown />
-                            </span>
-                            <select
-                                value={filterStatus}
-                                onChange={handleFilterStatus}
-                                className="relative appearance-none rounded border border-stroke bg-transparent py-3 px-8 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
-                            >
-                                <option value="">Status</option>
-                                <option value="Karyawan Tetap">Karyawan Tetap</option>
-                                <option value="Karyawan Tidak Tetap">Karyawan Tidak Tetap</option>
-                            </select>
-                        </div>
+                        
                     </div>
                     <div className="relative flex-2 mb-4 md:mb-0">
                         <input
                             type="text"
-                            placeholder="Cari Nama Pegawai..."
+                            placeholder="Recherche par Email"
                             value={searchKeyword}
                             onChange={handleSearch}
                             className="rounded-lg border-[1.5px] border-stroke bg-transparent py-2 pl-10 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary left-0"
@@ -191,49 +178,29 @@ const DataPegawai = () => {
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="bg-gray-2 text-left dark:bg-meta-4">
-                                <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">No</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Photo</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">NIK</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Nama Pegawai</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Jenis Kelamin</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Tanggal Masuk</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Status</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Hak Akses</th>
-                                <th className="py-4 px-4 font-medium text-black dark:text-white">Aksi</th>
+                                
+                                <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Email</th>
+                                <th className="py-4 px-4 font-medium text-black dark:text-white">Nom complet</th>
+                                <th className="py-4 px-4 font-medium text-black dark:text-white">Rôle</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {filteredDataPegawai.slice(startIndex, endIndex).map((data, index) => {
                                 return (
                                     <tr key={data.id}>
+                                        
+                                        
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                            <p className="text-black dark:text-white text-center">{startIndex + index + 1}</p>
-                                        </td>
-                                        <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark">
-                                            <div className="h-12.5 w-15">
-                                                <div className="rounded-full overflow-hidden">
-                                                    <img src={`http://localhost:5000/images/${data.photo}`} alt="Photo Profil" />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                            <p className="text-black dark:text-white text-center">{data.nik}</p>
+                                            <p className="text-black dark:text-white text-center">{data.email}</p>
                                         </td>
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <p className="text-black dark:text-white">{data.nama_pegawai}</p>
                                         </td>
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                            <p className="text-black dark:text-white">{data.jenis_kelamin}</p>
-                                        </td>
-                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                            <p className="text-black dark:text-white">{data.tanggal_masuk}</p>
-                                        </td>
-                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                            <p className="text-black dark:text-white">{data.status}</p>
-                                        </td>
-                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <p className="text-black dark:text-white">{data.hak_akses}</p>
                                         </td>
+                
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <div className="flex items-center space-x-3.5">
                                                 <Link
@@ -258,7 +225,7 @@ const DataPegawai = () => {
                 <div className="flex justify-between items-center mt-4 flex-col md:flex-row md:justify-between">
                     <div className="flex items-center space-x-2">
                         <span className="text-gray-5 dark:text-gray-4 text-sm py-4">
-                            Menampilkan {startIndex + 1}-{Math.min(endIndex, filteredDataPegawai.length)} dari {filteredDataPegawai.length} Data Pegawai
+                            Affichage {startIndex + 1}-{Math.min(endIndex, filteredDataPegawai.length)} de {filteredDataPegawai.length} données d'utilisateur
                         </span>
                     </div>
                     <div className="flex space-x-2 py-4">

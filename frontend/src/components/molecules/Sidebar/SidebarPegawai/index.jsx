@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import SidebarLinkGroup from '../SidebarLinkGroup'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { RxDashboard } from 'react-icons/rx'
 import { FaRegMoneyBillAlt } from 'react-icons/fa'
 import { FiSettings } from 'react-icons/fi'
 import { MdKeyboardArrowDown } from 'react-icons/md'
@@ -11,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { reset } from '../../../../config/redux/reducer/authReducer'
 
-const SidebarPegawai = ({ sidebarOpen, setSidebarOpen }) => {
+const SidebarUser = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation()
   const { pathname } = location
   const navigate = useNavigate();
@@ -199,4 +198,4 @@ const SidebarPegawai = ({ sidebarOpen, setSidebarOpen }) => {
   )
 }
 
-export default SidebarPegawai;
+export default SidebarUser;
