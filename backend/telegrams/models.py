@@ -49,4 +49,4 @@ class Telegram(models.Model):
     telegram_type = models.CharField(max_length=10, choices=TELEGRAM_TYPES)
 
     def __str__(self):
-        return self.subject
+        return self.id

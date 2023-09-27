@@ -5,7 +5,12 @@ from rest_framework.response import Response
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
+
+
+#---------------------------------
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
 	def post(self, request):
@@ -18,21 +23,25 @@ class UserRegister(APIView):
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class UserLogin(APIView):
-	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (SessionAuthentication,)
-	##
-	def post(self, request):
-		data = request.data
-		assert validate_email(data)
-		assert validate_password(data)
-		serializer = UserLoginSerializer(data=data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.check_user(data)
-			login(request, user)
-			return Response(serializer.data, status=status.HTTP_200_OK)
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
 
+    def post(self, request):
+        try:
+            data = request.data
+            assert validate_email(data)
+            assert validate_password(data)
+            serializer = UserLoginSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.check_user(data)
+                login(request, user)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            # Log the exception for debugging
+            print(f"Error in UserLogin: {str(e)}")
+            return Response("Internal Server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)

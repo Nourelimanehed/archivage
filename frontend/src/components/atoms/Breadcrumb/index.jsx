@@ -9,12 +9,7 @@ const Breadcrumb = (props) => {
             </h2>
 
             <nav>
-                <ol className='flex items-center gap-2'>
-                    <li>
-                        <Link to='/dashboard'>Dashboard /</Link>
-                    </li>
-                    <li className='text-primary'>{props.pageName}</li>
-                </ol>
+               
             </nav>
         </div>
     )

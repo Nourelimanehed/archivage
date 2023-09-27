@@ -54,19 +54,19 @@ const DataPotongan = () => {
 
     const onDeletePotongan = (id) => {
         Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin Menghapus?',
+            title: 'Confirmation',
+            text: 'Êtes-vous sûr de vouloir supprimer ?',
             icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteDataPotongan(id)).then(() => {
                     Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Data potongan berhasil dihapus.',
+                        title: 'Succès',
+                        text: 'Données de potongan supprimées avec succès.',
                         icon: 'success',
                         timer: 1000,
                         timerProgressBar: true,
@@ -142,10 +142,10 @@ const DataPotongan = () => {
 
     return (
         <Layout>
-            <Breadcrumb pageName='Data Potongan' />
-            <Link to="/data-potongan/form-data-potongan/add" >
+            <Breadcrumb pageName='Télégrammes' />
+            <Link to="/telegramsAdmin/form-data-potongan/add" >
                 <ButtonOne  >
-                    <span>Tambah Potongan</span>
+                    <span>Ajouter une télégramme</span>
                     <span>
                         <FaPlus />
                     </span>
@@ -156,7 +156,31 @@ const DataPotongan = () => {
                     <div className="relative flex-2 mb-4 md:mb-0">
                         <input
                             type='text'
-                            placeholder='Cari Potongan..'
+                            placeholder='Expéditeur'
+                            value={searchKeyword}
+                            onChange={handleSearch}
+                            className='rounded-lg border-[1.5px] border-stroke bg-transparent py-2 pl-10 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary left-0'
+                        />
+                        <span className='absolute left-2 py-3 text-xl'>
+                            <BiSearch />
+                        </span>
+                    </div>
+                    <div className="relative flex-2 mb-4 md:mb-0">
+                        <input
+                            type='text'
+                            placeholder='Déstinataire'
+                            value={searchKeyword}
+                            onChange={handleSearch}
+                            className='rounded-lg border-[1.5px] border-stroke bg-transparent py-2 pl-10 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary left-0'
+                        />
+                        <span className='absolute left-2 py-3 text-xl'>
+                            <BiSearch />
+                        </span>
+                    </div>
+                    <div className="relative flex-2 mb-4 md:mb-0">
+                        <input
+                            type='text'
+                            placeholder='Objet'
                             value={searchKeyword}
                             onChange={handleSearch}
                             className='rounded-lg border-[1.5px] border-stroke bg-transparent py-2 pl-10 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary left-0'
@@ -172,16 +196,19 @@ const DataPotongan = () => {
                         <thead>
                             <tr className='bg-gray-2 text-left dark:bg-meta-4'>
                                 <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    No
+                                    N°
                                 </th>
                                 <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    Potongan Gaji
+                                Expéditeur
                                 </th>
                                 <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    Jumlah Potongan
+                                   Déstinataire
                                 </th>
                                 <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    Aksi
+                                    Moyen de Transmission
+                                </th>
+                                <th className='py-4 px-4 font-medium text-black dark:text-white'>
+                                    Degré d'urgence
                                 </th>
                             </tr>
                         </thead>
@@ -224,7 +251,7 @@ const DataPotongan = () => {
                 <div className="flex justify-between items-center mt-4 flex-col md:flex-row md:justify-between">
                     <div className="flex items-center space-x-2">
                         <span className="text-gray-5 dark:text-gray-4 text-sm py-4">
-                            Menampilkan {startIndex + 1}-{Math.min(endIndex, filteredDataPotongan.length)} dari {filteredDataPotongan.length} Data Potongan
+                            Affichage de {startIndex + 1}-{Math.min(endIndex, filteredDataPotongan.length)} sur {filteredDataPotongan.length} 
                         </span>
                     </div>
                     <div className="flex space-x-2 py-4">
@@ -233,7 +260,7 @@ const DataPotongan = () => {
                             onClick={goToPrevPage}
                             className="py-2 px-6 rounded-lg border border-primary text-primary font-semibold hover:bg-primary hover:text-white dark:text-white dark:border-primary dark:hover:bg-primary dark:hover:text-white disabled:opacity-50"
                         >
-                            < MdKeyboardDoubleArrowLeft />
+                            <MdKeyboardDoubleArrowLeft />
                         </button>
                         {paginationItems()}
                         <button
@@ -241,7 +268,7 @@ const DataPotongan = () => {
                             onClick={goToNextPage}
                             className="py-2 px-6 rounded-lg border border-primary text-primary font-semibold hover:bg-primary hover:text-white dark:text-white dark:border-primary dark:hover:bg-primary dark:hover:text-white disabled:opacity-50"
                         >
-                            < MdKeyboardDoubleArrowRight />
+                            <MdKeyboardDoubleArrowRight />
                         </button>
                     </div>
                 </div>
