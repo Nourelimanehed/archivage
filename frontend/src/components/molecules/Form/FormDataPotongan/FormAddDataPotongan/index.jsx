@@ -19,6 +19,7 @@ const FormAddDataPotongan = () => {
         transmission_method:'',
         urgency_level:'',
         telegram_type:'',
+        attachment: null,
     });
 
     const {
@@ -31,6 +32,7 @@ const FormAddDataPotongan = () => {
         transmission_method,
         urgency_level,
         telegram_type,
+        attachment,
     } = formData;
 
     const dispatch = useDispatch();
@@ -48,6 +50,10 @@ const FormAddDataPotongan = () => {
         newFormData.append('urgency_level', urgency_level);
         newFormData.append('telegram_type', telegram_type);
         newFormData.append('details', details);
+        if (attachment) {
+            newFormData.append('attachment', attachment);
+        }
+    
      
 
         dispatch(createDataPegawai(newFormData, navigate))
@@ -87,11 +93,20 @@ const FormAddDataPotongan = () => {
     };
 
     const handleChange = (e) => {
+        if (e.target.name === 'attachment') {
+            setFormData({
+                ...formData,
+                attachment: e.target.files[0], // Stockez le fichier d'attachment
+            });}
+    else {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
-        });
-    };
+                });
+            };
+        }
+
+    
 
     useEffect(() => {
         dispatch(getMe());
@@ -269,6 +284,21 @@ const FormAddDataPotongan = () => {
                                     </div>
                                 </div>
                                 
+                            </div>
+                            <div className='mb-4.5 flex flex-col gap-6 xl:flex-row'>
+                                <div className='w-full xl:w-1/2'>
+                                    <label className='mb-2.5 block text-black dark:text-white'>
+                                        Pièce Jointe
+                                    </label>
+                                    <input
+                                        type='file'
+                                        id='attachment'
+                                        name='attachment'
+                                        onChange={handleChange}
+                                        accept='.pdf, .doc, .docx, .jpg, .jpeg, .png' // Types de fichiers acceptés
+                                        className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                    />
+                                </div>
                             </div>
 
                             <div className='flex flex-col md:flex-row w-full gap-3 text-center'>

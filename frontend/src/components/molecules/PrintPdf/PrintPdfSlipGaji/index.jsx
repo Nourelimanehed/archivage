@@ -83,14 +83,14 @@ const PrintPdfSlipGaji = () => {
             <div className="flex flex-col md:flex-row w-full gap-3 text-center p-6 bg-white dark:bg-meta-4">
                 <div>
                     <ButtonOne onClick={handlePrint}>
-                        <span>Cetak</span>
+                        <span>Imprimer</span>
                     </ButtonOne>
                 </div>
                 <div>
                     <ButtonTwo
                         onClick={() => navigate(-1)}
                     >
-                        <span>Kembali</span>
+                        <span>Retour</span>
                     </ButtonTwo>
                 </div>
             </div >

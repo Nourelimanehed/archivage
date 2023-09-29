@@ -9,16 +9,14 @@ import { TfiPrinter } from 'react-icons/tfi';
 
 const DetailDataGaji = () => {
     const [data, setData] = useState({
-        tahun: '',
-        bulan: '',
-        nik: '',
-        nama_pegawai: '',
-        jabatan: '',
-        gaji_pokok: '',
-        tj_transport: '',
-        uang_makan: '',
-        potongan: '',
-        total: '',
+        subject: '',
+        sender: '',
+        receiver:'',
+        details: '',
+        date:'',
+        transmission_method:'',
+        urgency_level:'',
+        telegram_type:'',
     });
     const { name } = useParams();
     const [index] = useState('');
@@ -27,11 +25,14 @@ const DetailDataGaji = () => {
     const { isError, user } = useSelector((state) => state.auth);
 
     const onSubmitPrint = () => {
-        navigate(`/laporan/slip-gaji/print-page?month=${data.bulan}&year=${data.tahun}&name=${name}`);
+        navigate("/telegrams/print");
+    };
+    const onSubmitPrint1 = () => {
+        navigate("/telegrams/printAttachment");
     };
 
     useEffect(() => {
-        const getDataPegawai = async () => {
+        const getDataEmployé = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/data_gaji/name/${name}`);
                 const data = response.data[0];
@@ -42,7 +43,7 @@ const DetailDataGaji = () => {
             }
         };
 
-        getDataPegawai();
+        getDataEmployé();
     }, [name]);
 
     useEffect(() => {
@@ -54,16 +55,16 @@ const DetailDataGaji = () => {
             navigate('/login');
         }
         if (user && user.hak_akses !== 'admin') {
-            navigate('/dashboard');
+            navigate('/tableau_de_bord');
         }
     }, [isError, user, navigate]);
 
     return (
         <Layout>
-            <Breadcrumb pageName='Detail Data Gaji Pegawai' />
-            <Link to='/data-gaji'>
+            <Breadcrumb pageName="Détails du télégramme" />
+            <Link to='/telegrams'>
                 <ButtonTwo>
-                    <span>Kembali</span>
+                    <span>Retour</span>
                 </ButtonTwo>
             </Link>
             <div className='rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mt-6'>
@@ -74,112 +75,68 @@ const DetailDataGaji = () => {
                     <div className='md:w-2/3'>
                         <div className='w-full md:text-lg'>
                             <h2 className='font-medium mb-4 block text-black dark:text-white'>
-                                <span className='inline-block w-32 md:w-40'>Nama</span>
+                                <span className='inline-block w-32 md:w-55'>Objet</span>
                                 <span className='inline-block w-7'>:</span>
-                                {data.nama_pegawai}
+                                {data.subject}
                             </h2>
                             <h2 className='font-medium mb-4 block text-black dark:text-white'>
-                                <span className='inline-block w-32 md:w-40'>NIK</span>
+                                <span className='inline-block w-32 md:w-55'>Expiditeur</span>
                                 <span className='inline-block w-6'>:</span>{' '}
                                 <span className='pl-[-10] md:pl-0'></span>
-                                {data.nik}
+                                {data.sender}
                             </h2>
                             <h2 className='font-medium mb-4 block text-black dark:text-white'>
-                                <span className='inline-block w-32 md:w-40'>Jabatan</span>
+                                <span className='inline-block w-32 md:w-55'>Destintaire</span>
                                 <span className='inline-block w-7'>:</span>
-                                {data.jabatan}
+                                {data.receiver}
                             </h2>
                             <h2 className='font-medium mb-4 block text-black dark:text-white'>
-                                <span className='inline-block w-32 md:w-40'>Bulan</span>
+                                <span className='inline-block w-32 md:w-55'>Details</span>
                                 <span className='pl-[-8] md:pl-0'></span>
                                 <span className='inline-block w-7'>:</span>
-                                {data.bulan}
+                                <span className='inline-block w-7'></span>
+                                {data.details}
                             </h2>
                             <h2 className='font-medium mb-4 block text-black dark:text-white'>
-                                <span className='inline-block w-32 md:w-40'>Tahun</span>
+                                <span className='inline-block w-32 md:w-55'>Degre d'Urgence</span>
                                 <span className='inline-block w-7'>:</span>
-                                {data.tahun}
+                                {data.urgency_level}
                                 <span className='pl-[-8] md:pl-0'></span>
                             </h2>
+                            <h2 className='font-medium mb-4 block text-black dark:text-white'>
+                                <span className='inline-block w-32 md:w-55'>Methode de transmisson</span>
+                                <span className='inline-block w-7'>:</span>
+                                {data.transmission_method}
+                                <span className='pl-[-8] md:pl-0'></span>
+                            </h2>
+                            <h2 className='font-medium mb-4 block text-black dark:text-white'>
+                                <span className='inline-block w-32 md:w-55'>Type</span>
+                                <span className='inline-block w-7'>:</span>
+                                {data.telegram_type}
+                                <span className='pl-[-8] md:pl-0'></span>
+                            </h2>
+                            
                         </div>
                     </div>
-                    <table className='w-full table-auto'>
-                        <thead>
-                            <tr className='bg-gray-2 text-left dark:bg-meta-4'>
-                                <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    No
-                                </th>
-                                <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    Keterangan
-                                </th>
-                                <th className='py-4 px-4 font-medium text-black dark:text-white'>
-                                    Jumlah
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className='bg-gray-50 dark:border-strokedark'>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    {index + 1}
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Gaji Pokok
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Rp. {data.gaji_pokok}
-                                </td>
-                            </tr>
-                            <tr className='bg-gray-50 dark:border-strokedark'>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    {index + 2}
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Tunjangan Transportasi
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Rp. {data.tj_transport}
-                                </td>
-                            </tr>
-                            <tr className='bg-gray-50 dark:border-strokedark'>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    {index + 3}
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Uang Makan
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Rp. {data.uang_makan}
-                                </td>
-                            </tr>
-                            <tr className='bg-gray-50 dark:border-strokedark'>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    {index + 4}
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Potongan
-                                </td>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Rp. {data.potongan}
-                                </td>
-                            </tr>
-                            <tr className='bg-gray-50 dark:border-strokedark'>
-                                <td className='border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                </td>
-                                <td className='font-medium border-b  border-[#eee] dark:border-strokedark py-5 text-right text-black dark:text-white'>
-                                    Total Gaji :
-                                </td>
-                                <td className='font-medium border-b border-[#eee] dark:border-strokedark py-5 px-4 text-black dark:text-white'>
-                                    Rp. {data.total}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <div className='w-full md:w-1/2 md:justify-end py-6'>
+                        <div className='w-full md:w-auto'>
+                            <ButtonOne
+                                onClick={onSubmitPrint1}
+                            >
+                                <span>Imprimer la piece jointe</span>
+                                <span>
+                                    <TfiPrinter />
+                                </span>
+                            </ButtonOne>
+                        </div>
+                    </div>
+                    <div className='w-full md:w-1/2 md:justify-end py-6'>
+                        
                         <div className='w-full md:w-auto'>
                             <ButtonOne
                                 onClick={onSubmitPrint}
                             >
-                                <span>Cetak Gaji Pegawai</span>
+                                <span>Imprimer </span>
                                 <span>
                                     <TfiPrinter />
                                 </span>

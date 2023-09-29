@@ -19,7 +19,8 @@ import {
   DetailDataGaji,
   PrintPdfSlipGaji,
   PrintPdfLaporanAbsensi,
-  PrintPdfDataGajiPegawai
+  PrintPdfDataGajiPegawai,
+  SidebarUser
 } from '../../components';
 import {
   DataPegawai,
@@ -122,7 +123,18 @@ const AppRoutes = () => {
       <Route
         path='/telegrams/form-telegrams/edit/:id'
         element={<FormEditDataPotongan />} />
-
+      <Route
+        path='/telegrams/details'
+        element={<DetailDataGaji />}
+      />
+       <Route
+        path='/telegrams/print'
+        element={<PrintPdfLaporanGaji />}
+      />
+       <Route
+        path='/telegrams/printAttachment'
+        element={<PrintPdfSlipGaji/>}
+      />
      
       <Route
         path='/changepassword'
@@ -130,12 +142,22 @@ const AppRoutes = () => {
       />
       
 
+      <Route
+        path="/test"
+        element={<SidebarUser />}
+      />
+    
+
+
+
+
       {/* Route Not Found 404 */}
       <Route
         path="*"
         element={<NotFound />}
       />
     </Routes>
+    
   )
 }
 
