@@ -11,22 +11,26 @@ import Swal from 'sweetalert2';
 const FormAddDataPotongan = () => {
     const [formData, setFormData] = useState({
         nik: '',
-        email: '',
-        username: '',
-        password: '',
-        confPassword: '',
+       subject: '',
+        sender: '',
+        receiver:'',
         details: '',
-        is_admin: '',
+        date:'',
+        transmission_method:'',
+        urgency_level:'',
+        telegram_type:'',
     });
 
     const {
         nik,
-        email,
-        username,
-        password,
-        confPassword,
+       subject,
+        sender,
+        receiver,
+        date,
         details,
-        is_admin,
+        transmission_method,
+        urgency_level,
+        telegram_type,
     } = formData;
 
     const dispatch = useDispatch();
@@ -37,12 +41,14 @@ const FormAddDataPotongan = () => {
         e.preventDefault();
         const newFormData = new FormData();
 
-        newFormData.append('email', email);
-        newFormData.append('username', username);
-        newFormData.append('password', password);
-        newFormData.append('confPassword', confPassword);
+        newFormData.append('subject', subject);
+        newFormData.append('sender', sender);
+        newFormData.append('date', date);
+        newFormData.append('transmission_method', transmission_method);
+        newFormData.append('urgency_level', urgency_level);
+        newFormData.append('telegram_type', telegram_type);
         newFormData.append('details', details);
-        newFormData.append('is_admin', is_admin);
+     
 
         dispatch(createDataPegawai(newFormData, navigate))
             .then((response) => {
@@ -102,7 +108,7 @@ const FormAddDataPotongan = () => {
 
     return (
         <Layout>
-            <Breadcrumb pageName="Formulaire d'ajout d'un employé" />
+            <Breadcrumb pageName="Formulaire d'ajout d'un télégramme" />
             <div className='sm:grid-cols-2'>
                 <div className='flex flex-col gap-9'>
                     <div className='rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark'>
@@ -112,109 +118,175 @@ const FormAddDataPotongan = () => {
                                 <div className='mb-4.5 flex flex-col gap-6 xl:flex-row'>
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Nom Complet <span className='text-meta-1'>*</span>
+                                        Objet <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
                                             type='text'
-                                            id='username'
-                                            name='username'
-                                            value={username}
+                                            id='subject'
+                                            name='subject'
+                                            value={subject}
                                             onChange={handleChange}
                                             required={true}
-                                            placeholder='Nom complet'
+                                            placeholder='Objet'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
 
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Adresse email <span className='text-meta-1'>*</span>
+                                            Expiditeur <span className='text-meta-1'>*</span>
+                                        </label>
+                                        <input
+                                            type='email'
+                                            id='sender'
+                                            name='sender'
+                                            value={sender}
+                                            onChange={handleChange}
+                                            required={true}
+                                            placeholder="Adresse email d'expiditeur"
+                                            className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                        />
+                                    </div>
+                                </div>
+                                <div className='mb-4.5 flex flex-col gap-6 xl:flex-row'>
+                                    <div className='w-full xl:w-1/2'>
+                                        <label className='mb-2.5 block text-black dark:text-white'>
+                                        Destinataire <span className='text-meta-1'>*</span>
+                                        </label>
+                                        <input
+                                            type='email'
+                                            id='receiver'
+                                            name='receiver'
+                                            value={receiver}
+                                            onChange={handleChange}
+                                            required={true}
+                                            placeholder='Adresse email de destinataire'
+                                            className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                        />
+                                    </div>
+
+                                    <div className='w-full xl:w-1/2'>
+                                        <label className='mb-2.5 block text-black dark:text-white'>
+                                            Details<span className='text-meta-1'></span>
                                         </label>
                                         <input
                                             type='text'
-                                            id='email'
-                                            name='email'
-                                            value={email}
+                                            id='details'
+                                            name='details'
+                                            value={details}
                                             onChange={handleChange}
                                             required={true}
-                                            placeholder="Adresse email"
+                                            placeholder=""
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
                                 </div>
-                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                                <div className='mb-4.5 flex flex-col gap-6 xl:flex-row'>
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
-                                            Mot de passe <span className='text-meta-1'>*</span>
+                                        Date <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
-                                            type='password'
-                                            id='password'
-                                            name='password'
-                                            value={password}
+                                            type='text'
+                                            id='date'
+                                            name='date'
+                                            value={date}
                                             onChange={handleChange}
                                             required={true}
-                                            placeholder='Entrez le mot de passe'
+                                            placeholder='Objet'
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
                                     <div className='w-full xl:w-1/2'>
+                                        <label className='mb-2.5 block text-black dark:text-white'>
+                                            Degre d'Urgence <span className='text-meta-1'>*</span>
+                                        </label>
+                                        <div className='relative z-20 bg-transparent dark:bg-form-input'>
+                                            <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                                id='urgency_level'
+                                                name='urgency_level'
+                                                value={urgency_level}
+                                                onChange={handleChange}
+                                                required={true}
+                                            >
+                                                <option value='' disabled={true}>Sélectionnez</option>
+                                                <option value='Urgent'>Urgent</option>
+                                                <option value='Semi-urgent'>Semi-Urgent</option>
+                                                <option value='Non urgent'>Non Urgent</option>
+                                            </select>
+                                            <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
+                                                <MdOutlineKeyboardArrowDown />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            <div className='mb-4.5 flex flex-col gap-6 xl:flex-row'>
+                                <div className='w-full xl:w-1/2'>
+                                    <label className='mb-2.5 block text-black dark:text-white'>
+                                        Methode de transmisson <span className='text-meta-1'>*</span>
+                                    </label>
+                                    <div className='relative z-20 bg-transparent dark:bg-form-input'>
+                                        <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                            id='transmission_method'
+                                            name='transmission_method'
+                                            value={transmission_method}
+                                            onChange={handleChange}
+                                            required={true}
+                                        >
+                                            <option value='' disabled={true}>Sélectionnez</option>
+                                            <option value='Messagerie'>Messagerie</option>
+                                            <option value='Fax'>Fax</option>
+                                            <option value='Porte'>Porte</option>
+                                            <option value='Autre'>Autre</option>
+                                        </select>
+                                        <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
+                                            <MdOutlineKeyboardArrowDown />
+                                        </span>
+                                    </div>
+                                </div>
 
-                                        <label className='mb-2.5 block text-black dark:text-white'>
-                                            Confirmer votre mot de passe <span className='text-meta-1'>*</span>
-                                        </label>
-                                        <input
-                                            type='password'
-                                            id='confPassword'
-                                            name='confPassword'
-                                            value={confPassword}
-                                            onChange={handleChange}
-                                            required={true}
-                                            placeholder='Confirmez votre mot de passe'
-                                            className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
-                                        />
-                                    </div>
-                                </div>
                                 <div className='w-full xl:w-1/2'>
                                     <label className='mb-2.5 block text-black dark:text-white'>
                                         Type <span className='text-meta-1'>*</span>
                                     </label>
                                     <div className='relative z-20 bg-transparent dark:bg-form-input'>
                                         <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
-                                            id='is_admin'
-                                            name='is_admin'
-                                            value={is_admin}
+                                            id='telegram_type'
+                                            name='telegram_type'
+                                            value={telegram_type}
                                             onChange={handleChange}
                                             required={true}
                                         >
                                             <option value='' disabled={true}>Sélectionnez</option>
-                                            <option value='admin'>Administrateur</option>
-                                            <option value='pegawai'>Utilisateur</option>
+                                            <option value='depart'>Depart</option>
+                                            <option value='arrive'>Arrive</option>
+                                            <option value='transit'>Transit</option>
                                         </select>
                                         <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
                                             <MdOutlineKeyboardArrowDown />
                                         </span>
-                                       
                                     </div>
                                 </div>
-                                </div>
-
-                                <div className='flex flex-col md:flex-row w-full gap-3 text-center'>
-                            <div className='w-full md:w-1/2'>
-                                <div className='md:mr-4 mb-4'> {/* Apply margin-right and margin-bottom here */}
-                                    <ButtonOne>
-                                        <span>Enregistrer</span>
-                                    </ButtonOne>
-                                </div>
-                            </div>
-                            <Link to="/usersdata">
-                                <ButtonTwo>
-                                    <span>Retour</span>
-                                </ButtonTwo>
-                            </Link>
-                        </div>
                                 
-                           
+                            </div>
+
+                            <div className='flex flex-col md:flex-row w-full gap-3 text-center'>
+                                <div className='w-full md:w-1/2'>
+                                    <div className='md:mr-4 mb-4'> {/* Apply margin-right and margin-bottom here */}
+                                        <ButtonOne>
+                                            <span>Enregistrer</span>
+                                        </ButtonOne>
+                                    </div>
+                                </div>
+                                <Link to="/telegrams">
+                                    <ButtonTwo>
+                                        <span>Retour</span>
+                                    </ButtonTwo>
+                                </Link>
+                            </div>
+                                    
+                            </div>  
                         </form>
                     </div>
                 </div>

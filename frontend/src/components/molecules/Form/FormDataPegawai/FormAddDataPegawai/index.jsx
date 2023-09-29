@@ -131,7 +131,7 @@ const FormAddDataPegawai = () => {
                                             Adresse email <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
-                                            type='text'
+                                            type='email'
                                             id='email'
                                             name='email'
                                             value={email}

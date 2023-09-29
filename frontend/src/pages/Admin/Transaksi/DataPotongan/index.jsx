@@ -143,7 +143,7 @@ const DataPotongan = () => {
     return (
         <Layout>
             <Breadcrumb pageName='Télégrammes' />
-            <Link to="/telegramsAdmin/form-data-potongan/add" >
+            <Link to="/telegrams/form-telegrams/add" >
                 <ButtonOne  >
                     <span>Ajouter une télégramme</span>
                     <span>

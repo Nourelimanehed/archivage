@@ -58,42 +58,13 @@ const AppRoutes = () => {
         path='/usersdata/form-usersdata/edit/:id'
         element={<FormEditDataPegawai />}
       />
-      <Route
-        path='/data-jabatan'
-        element={<DataJabatan />}
-      />
-      <Route
-        path='/data-jabatan/form-data-jabatan/add'
-        element={<FormAddDataJabatan />}
-      />
-      <Route
-        path='/data-jabatan/form-data-jabatan/edit/:id'
-        element={<FormEditDataJabatan />}
-      />
-
-      {/* Transaksi Admin */}
-      <Route
-        path='/data-kehadiran'
-        element={<DataKehadiran />}
-      />
-      <Route
-        path='/data-kehadiran/form-data-kehadiran/add'
-        element={<FormAddDataKehadiran />}
-      />
-      <Route
-        path='/data-kehadiran/form-data-kehadiran/edit/:id'
-        element={<FormEditDataKehadiran />}
-      />
+ 
       <Route
         path='/telegramsAdmin'
         element={<DataPotongan />}
       />
-      <Route
-        path='/telegramsAdmin/form-data-potongan/add'
-        element={<FormAddDataPotongan />} />
-      <Route
-        path='/telegramsAdmin/form-data-potongan/edit/:id'
-        element={<FormEditDataPotongan />} />
+      
+      
       <Route
         path='/data-gaji'
         element={<DataGaji />}
@@ -102,16 +73,14 @@ const AppRoutes = () => {
         path='/data-gaji/detail-data-gaji/name/:name'
         element={<DetailDataGaji />}
       />
+
       <Route
         path='/data-gaji/cetak-gaji/slip-gaji/name/:name'
         element={<PrintPdfSlipGaji />}
       />
 
       {/* Laporan Admin */}
-      <Route
-        path='/laporan/gaji'
-        element={<LaporanGaji />}
-      />
+      
       <Route
         path='/laporan/gaji/print-page'
         element={<PrintPdfLaporanGaji />}
@@ -133,26 +102,33 @@ const AppRoutes = () => {
         element={<PrintPdfSlipGaji />}
       />
 
-      {/* Pengaturan Admin */}
+      {/*   Mot de passe admin Admin */}
       <Route
-        path='/ubah-password'
+        path='/changepasswordAdmin'
         element={<UbahPasswordAdmin />}
       />
 
-      {/* Route Pegawai */}
-      {/* Dashboard Data Gaji Pegawai */}
+      {/* Route Utilisateur */}
+      
+     
+      {/* Dashboard Utilisateur */}
       <Route
         path='/telegrams'
-        element={<DataGajiPegawai />}
+        element={<DataPotongan />}
       />
       <Route
-        path='/telegrams/print-page'
-        element={<PrintPdfDataGajiPegawai />}
-      />
+        path='/telegrams/form-telegrams/add'
+        element={<FormAddDataPotongan />} />
+      <Route
+        path='/telegrams/form-telegrams/edit/:id'
+        element={<FormEditDataPotongan />} />
+
+     
       <Route
         path='/changepassword'
         element={<UbahPasswordPegawai />}
       />
+      
 
       {/* Route Not Found 404 */}
       <Route
