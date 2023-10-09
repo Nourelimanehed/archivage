@@ -20,7 +20,7 @@ function LoginInput() {
 
   useEffect(() => {
     if (user ||  isSuccess) {
-      navigate("/dashboard");
+      navigate("/usersdata");
     }
   }, [user, isSuccess, dispatch, navigate]);
 

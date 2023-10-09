@@ -27,7 +27,7 @@ const PrintPdfDataGajiPegawai = () => {
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
-        documentTitle: "Slip_Gaji_Pegawai_PT. Humpuss Karbometil Selulosa",
+        documentTitle: "document : detailles telegrammes",
     });
 
     useEffect(() => {

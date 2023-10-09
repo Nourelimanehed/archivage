@@ -13,9 +13,9 @@ const Banner = () => {
                 animate={{ x: 0 }}
                 transition={{ duration: 1 }}
             >
-                <h1 className="text-3xl font-semibold text-center mb-0 translate-y-[-30%] sm:translate-y-[-0%] text-primary md:text-left">
+                <h1 className="text-4xl font-semibold text-center mb-0 translate-y-[-30%] sm:translate-y-[-0%] text-primary md:text-left">
                     Archivez vos télégrammes facilement
-                    <br />avec l'application Telegram Archiver</h1>
+                    <br /></h1>
                 <p className="pt-8 text-center max-w-xl mb-6 font-medium translate-y-[-60%] sm:translate-y-[-0%] md:text-left dark:text-white">
                     Une plateforme pratique pour gérer et archiver
                     vos télégrammes de manière efficace et organisée.
